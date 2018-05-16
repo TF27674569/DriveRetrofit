@@ -17,9 +17,11 @@ public class DriverAdapter implements Adapter {
 
     private Adapter adapter;
     private Type type;
+    private String methodName;
 
-    public DriverAdapter(Adapter adapter, Type type) {
+    public DriverAdapter(Adapter adapter, Type type,String methodName) {
         this.adapter = adapter;
+        this.methodName = methodName;
         this.type = type;
     }
 
@@ -32,7 +34,7 @@ public class DriverAdapter implements Adapter {
     @Override
     public <T> T adapt(Call call) {
         // 检测是返回值是否合法
-        Utils.checkReturnType(checkReturnType(type),legitimateReturnTypeName());
+        Utils.checkReturnType(checkReturnType(type),methodName,legitimateReturnTypeName());
 
         // 调用适配器
         return adapter.adapt(call);

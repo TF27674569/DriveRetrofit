@@ -56,17 +56,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        UsbClient.get().check1(null).execute(new Call.Callback() {
-            @Override
-            public void onSuccess(byte[] result) {
-
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
+//        UsbClient.get().check1(null).execute(new Call.Callback() {
+//            @Override
+//            public void onSuccess(byte[] result) {
+//
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//
+//            }
+//        });
 
 
     }

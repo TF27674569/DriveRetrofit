@@ -31,9 +31,9 @@ public class Utils {
         }
     }
 
-    public static void checkReturnType(boolean legitimate,String message) {
+    public static void checkReturnType(boolean legitimate,String methodName,String message) {
         if (!legitimate) {
-            throw new IllegalStateException("返回参数类型不合法,返回类型必须是"+message);
+            throw new IllegalStateException("函数 "+methodName+" 的返回类型必须是: "+message);
         }
     }
 

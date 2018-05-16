@@ -43,40 +43,41 @@ public class TestDriver implements UsbDrive {
                     @Override
                     public void subscribe(ObservableEmitter<byte[]> e) throws Exception {
                         count++;
-                        if (count == 2) {
+                        if (count > 3) {
                             e.onNext(info.getIntercept());
                         } else {
                             e.onError(new Throwable("测试"));
                         }
                     }
                 })
-//                .retryWhen(new RetryFunc(info.getRetryCount(), info.getInterval()))
+                .retryWhen(new RetryFunc(info.getRetryCount(), info.getInterval()))
                 .subscribeOn(Schedulers.io())
-        .subscribe(new Observer<byte[]>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+                .subscribe(new Observer<byte[]>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(byte[] value) {
-                try {
-                    callback.onSuccess(value);
-                } catch (Exception e) {
-                    callback.onError(e.getMessage());
-                }
-            }
+                    @Override
+                    public void onNext(byte[] value) {
+                        count = 0;
+                        try {
+                            callback.onSuccess(value);
+                        } catch (Exception e) {
+                            callback.onError(e.getMessage());
+                        }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                callback.onError(e.getMessage());
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
 
-            @Override
-            public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-            }
-        });
+                    }
+                });
                 /*.subscribe(new Consumer<byte[]>() {
                     @Override
                     public void accept(byte[] value) throws Exception {
@@ -90,6 +91,7 @@ public class TestDriver implements UsbDrive {
                             callback.onError(e.getMessage());
                         }
                     }
-                })*/;
+                })*/
+        ;
     }
 }
