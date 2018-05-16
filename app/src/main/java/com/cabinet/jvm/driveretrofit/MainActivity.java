@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.cabinet.jvm.driveretrofit.driver.UsbClient;
 
+import org.driver.Rxjava2RetryWithDelay;
 import org.driver.annoation.Log;
 import org.driver.modle.Call;
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public void click(View view) {
         UsbClient.get()
                 .check2()
+                .retryWhen(new Rxjava2RetryWithDelay(5,2000))
                 .subscribe(new Consumer<byte[]>() {
                     @Override
                     public void accept(byte[] bytes) throws Exception {
@@ -53,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
                         android.util.Log.e("TAG", "onNext: "+Thread.currentThread().getName()+" "+printHex(bytes) );
                     }
                 });
+
+        UsbClient.get().check1(null).execute(new Call.Callback() {
+            @Override
+            public void onSuccess(byte[] result) {
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
 
 
     }

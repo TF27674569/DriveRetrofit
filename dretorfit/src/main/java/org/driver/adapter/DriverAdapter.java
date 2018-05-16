@@ -32,7 +32,7 @@ public class DriverAdapter implements Adapter {
     @Override
     public <T> T adapt(Call call) {
         // 检测是返回值是否合法
-        Utils.checkReturnType(checkReturnType(type));
+        Utils.checkReturnType(checkReturnType(type),legitimateReturnTypeName());
 
         // 调用适配器
         return adapter.adapt(call);
@@ -46,5 +46,13 @@ public class DriverAdapter implements Adapter {
     @Override
     public boolean checkReturnType(Type type) {
         return adapter.checkReturnType(type);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String legitimateReturnTypeName() {
+        return adapter.legitimateReturnTypeName();
     }
 }

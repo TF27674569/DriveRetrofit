@@ -24,6 +24,12 @@ public interface Adapter {
      */
     boolean checkReturnType(Type type);
 
+    /**
+     *
+     * @return
+     */
+    String legitimateReturnTypeName();
+
 
     Adapter DEFAULT_FACTORY = new Adapter() {
         @SuppressWarnings("unchecked")
@@ -35,6 +41,14 @@ public interface Adapter {
         @Override
         public boolean checkReturnType(Type type) {
             return type==Call.class;
+        }
+
+        /**
+         * @return
+         */
+        @Override
+        public String legitimateReturnTypeName() {
+            return Call.class.getName();
         }
     };
 

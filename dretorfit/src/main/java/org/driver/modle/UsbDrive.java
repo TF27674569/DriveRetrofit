@@ -15,7 +15,7 @@ public interface UsbDrive {
     /**
      * 发送指令
      *
-     * @param info 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
+     * @param info 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调,否则监听器收不到结果
      * @param callback 返回结果
      */
     void execute(Info info, Call.Callback callback);

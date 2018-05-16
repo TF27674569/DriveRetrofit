@@ -66,4 +66,12 @@ public class RxJava2CallAdapter<T> implements Adapter {
     public boolean checkReturnType(Type type) {
         return type == Observable.class;
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public String legitimateReturnTypeName() {
+        return Observable.class.getName();
+    }
 }

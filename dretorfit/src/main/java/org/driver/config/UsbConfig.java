@@ -31,7 +31,7 @@ public class UsbConfig {
     public static final int LENGTH_SIZE = 1;
 
     /**
-     * 长度所在第几个数据处（不是字节,是数据拼装）
+     * 长度所在第几个数据处（不是字节,是数据拼装位置）
      */
     public static final int LENGTH_INDEX = 3;
 
