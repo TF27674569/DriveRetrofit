@@ -103,10 +103,16 @@ final class ServiceMethod {
         return builder.intercepr;
     }
 
-    long Interval() {
+    /**
+     * 重试间隔
+     */
+    long interval() {
         return builder.timer;
     }
 
+    /**
+     * 重试次数
+     */
     int retryCount() {
         return builder.retryCount;
     }

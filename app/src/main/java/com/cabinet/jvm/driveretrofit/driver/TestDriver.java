@@ -30,6 +30,11 @@ public class TestDriver implements UsbDrive {
                 .execute(new Runnable() {
                     @Override
                     public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         // 这里如果是进行串口通信
                         // 发送指令
                         // send(instructions.getSend(),instructions.getIntercept());
