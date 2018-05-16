@@ -33,11 +33,10 @@ public class DriverInvocationHandler<T> implements InvocationHandler {
         if (method.getDeclaringClass() == Object.class) {
             return method.invoke(this, args);
         }
-
         // 解析函数的注解等信息
         ServiceMethod serviceMethod = loadServiceMethod(method, args);
         // 适配器
-        DriverAdapter adapter = new DriverAdapter(mParams.adapter);
+        DriverAdapter adapter = new DriverAdapter(mParams.adapter,serviceMethod.returnType());
         // 适配
         return adapter.adapt(new RealCall(mParams.drive,serviceMethod,args));
     }

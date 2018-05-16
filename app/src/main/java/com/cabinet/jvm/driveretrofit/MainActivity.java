@@ -45,13 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void click(View view) {
         UsbClient.get()
-                .check()
+                .check2()
                 .subscribe(new Consumer<byte[]>() {
                     @Override
                     public void accept(byte[] bytes) throws Exception {
                         // 因为我那里模拟的串口返回的值是拦截指令 这里返回的是check()函数的@Intercept({127,126,10,10,9,10,10,126,127}) 注解的值
-                        android.util.Log.e("TAG", "onNext: "+printHex(bytes) );
+                        android.util.Log.e("TAG", "onNext: "+Thread.currentThread().getName()+" "+printHex(bytes) );
                     }
                 });
+
+
     }
 }

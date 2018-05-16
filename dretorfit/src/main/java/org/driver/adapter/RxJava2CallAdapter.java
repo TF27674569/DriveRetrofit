@@ -2,6 +2,8 @@ package org.driver.adapter;
 
 import org.driver.modle.Call;
 
+import java.lang.reflect.Type;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -55,4 +57,13 @@ public class RxJava2CallAdapter<T> implements Adapter {
     }
 
 
+    /**
+     * 是否是返回的类型
+     *
+     * @param type
+     */
+    @Override
+    public boolean checkReturnType(Type type) {
+        return type == Observable.class;
+    }
 }

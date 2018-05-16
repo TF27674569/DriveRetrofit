@@ -1,5 +1,7 @@
 package org.driver.annoation;
 
+import org.driver.config.UsbConfig;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,5 +21,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.PARAMETER})
 public @interface Intercept {
 
-    byte[] value() default -1;
+    byte[] value() default UsbConfig.DEFAULT_NO_VALUE;
 }

@@ -1,6 +1,6 @@
 package org.driver.modle;
 
-import org.driver.Instructions;
+import org.driver.Info;
 
 /**
  * Description : 驱动
@@ -15,9 +15,9 @@ public interface UsbDrive {
     /**
      * 发送指令
      *
-     * @param instructions 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
+     * @param info 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
      * @param callback 返回结果
      */
-    void execute(Instructions instructions, Call.Callback callback);
+    void execute(Info info, Call.Callback callback);
 
 }

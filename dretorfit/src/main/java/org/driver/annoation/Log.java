@@ -1,5 +1,7 @@
 package org.driver.annoation;
 
+import org.driver.config.UsbConfig;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -34,4 +36,9 @@ public @interface Log {
     }
 
     Logger value() default Logger.OFF;
+
+    /**
+     * 占的字节大小
+     */
+    int size() default UsbConfig.OTHER_LENGTH;
 }

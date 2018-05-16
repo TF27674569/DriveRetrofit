@@ -1,10 +1,7 @@
 package com.cabinet.jvm.driveretrofit.driver;
 
 import org.driver.UsbRetorfit;
-import org.driver.Instructions;
 import org.driver.adapter.RxJava2CallAdapter;
-import org.driver.modle.UsbDrive;
-import org.driver.modle.Call;
 
 /**
  * Description :

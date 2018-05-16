@@ -1,6 +1,5 @@
 package org.driver.proxy;
 
-import org.driver.Instructions;
 import org.driver.modle.UsbDrive;
 import org.driver.modle.Call;
 
@@ -14,8 +13,11 @@ import org.driver.modle.Call;
  */
 public class RealCall implements Call {
 
+    // 执行驱动（okhttpcall）
     private UsbDrive drive;
+    // 执行参数所在类（Request）
     private ServiceMethod serviceMethod;
+    // 改变的参数（函数参数里面的值）
     private Object[] args;
 
     public RealCall(UsbDrive drive, ServiceMethod serviceMethod, Object[] args) {
@@ -31,23 +33,9 @@ public class RealCall implements Call {
      */
     @Override
     public void execute(Call.Callback callback) {
-
         // 这里会重新处理args反射
-        // thanks for okhttp
-        byte[] command = serviceMethod.newBuilder()
-                .args(args)// 为了args改变时重新赋予参数
-                .build()
-                .command();
-
-        // 创建指令
-        Instructions instructions = new Instructions();
-        instructions.setSend(command);
-        instructions.setIntercept(serviceMethod.intercepr());
-        instructions.setInterval(serviceMethod.Interval());
-        instructions.setRetryCount(serviceMethod.retryCount());
-
         // 驱动执行 真正回调给UsbDriver对象开始执行所有封装指令
-        drive.execute(instructions, callback);
+        drive.execute(serviceMethod.info(args), callback);
     }
 
 }

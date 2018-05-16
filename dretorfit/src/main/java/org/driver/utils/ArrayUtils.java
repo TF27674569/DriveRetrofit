@@ -1,5 +1,7 @@
 package org.driver.utils;
 
+import org.driver.config.UsbConfig;
+
 import java.util.Arrays;
 
 /**
@@ -12,33 +14,38 @@ import java.util.Arrays;
  */
 public class ArrayUtils {
 
+
     /**
-     * 多个数组合并
-     *
-     * @param first
-     * @param rest
-     * @return
+     * 合并数组补全length
      */
-    public static byte[] concatAll(byte[] first, byte[]... rest) {
-        // 如果包头都是null 则证明只丢拦截指令
-        if (first == null) {
+    public static byte[] merge(byte[]... values) {
+        // 判断包是否合法
+        if (values == null || values.length < 4||values[0]==null) {
             return null;
         }
-        int totalLength = first.length;
-        for (byte[] array : rest) {
-            if (array == null) {
-                continue;
+
+        // 长度本身占一个字节
+        int length = 1;
+        for (byte[] value : values) {
+            if (value != null) {
+                length += value.length;
             }
-            totalLength += array.length;
         }
-        byte[] result = Arrays.copyOf(first, totalLength);
-        int offset = first.length;
-        for (byte[] array : rest) {
-            if (array == null) {
-                continue;
+
+        // 先把第一个拷进去
+        byte[] result = Arrays.copyOf(values[0], length);
+        int offset = values[0].length;
+
+        // 拼接指令
+        for (int i = 1, index = 0; i < values.length; i++) {
+            if (values[i] == null) continue;
+            if (index == UsbConfig.LENGTH_INDEX) {
+                System.arraycopy(Utils.intToByte(length, UsbConfig.LENGTH_SIZE), 0, result, offset, UsbConfig.LENGTH_SIZE);
+                offset += UsbConfig.LENGTH_SIZE;
             }
-            System.arraycopy(array, 0, result, offset, array.length);
-            offset += array.length;
+            System.arraycopy(values[i], 0, result, offset, values[i].length);
+            offset += values[i].length;
+            index++;
         }
         return result;
     }
@@ -47,9 +54,6 @@ public class ArrayUtils {
      * 位移运算获取int
      */
     public static int byteArrayToInt(byte[] b) {
-        return b[3] & 0xFF |
-                (b[2] & 0xFF) << 8 |
-                (b[1] & 0xFF) << 16 |
-                (b[0] & 0xFF) << 24;
+        return b[3] & 0xFF | (b[2] & 0xFF) << 8 | (b[1] & 0xFF) << 16 | (b[0] & 0xFF) << 24;
     }
 }

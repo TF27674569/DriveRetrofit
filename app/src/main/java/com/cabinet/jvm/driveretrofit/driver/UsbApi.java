@@ -31,6 +31,9 @@ public interface UsbApi {
     @Intercept({-1,-2,10,10,9,10,10,-2,-1})
     Observable<byte[]> check();
 
+    @Intercept({-1,-2,1,1,9,1,0,-2,-1})
+    Observable<byte[]> check2();
+
     @Head(0xfffe)
     @Adress(0x05)
     @Fun(0x06)

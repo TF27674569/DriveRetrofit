@@ -1,6 +1,6 @@
 package com.cabinet.jvm.driveretrofit.driver;
 
-import org.driver.Instructions;
+import org.driver.Info;
 import org.driver.modle.Call;
 import org.driver.modle.UsbDrive;
 
@@ -18,15 +18,15 @@ public class TestDriver implements UsbDrive {
     /**
      * 发送指令
      *
-     * @param instructions 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
+     * @param info 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
      * @param callback     返回结果
      */
     @Override
-    public void execute(final Instructions instructions, final Call.Callback callback) {
+    public void execute(final Info info, final Call.Callback callback) {
         // 发送指令可以：https://github.com/TF27674569/Command
 
         // 这里模拟串口通信
-        Executors.newSingleThreadExecutor()
+        Executors.newCachedThreadPool()
                 .execute(new Runnable() {
                     @Override
                     public void run() {
@@ -37,9 +37,9 @@ public class TestDriver implements UsbDrive {
                         }
                         // 这里如果是进行串口通信
                         // 发送指令
-                        // send(instructions.getSend(),instructions.getIntercept());
+                        // send(info.getSend(),info.getIntercept());
                         // 如果拿到返回结果
-                        byte[] intercept = instructions.getIntercept();
+                        byte[] intercept = info.getIntercept();
                         try {
                             callback.onSuccess(intercept);
                         } catch (Exception e) {

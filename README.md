@@ -30,11 +30,11 @@ public class TestDriver implements UsbDrive {
     /**
      * 发送指令
      *
-     * @param instructions 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
+     * @param info 封装了发送指令，拦截指令，重试次数，间隔时间等 ，一定需要用callback回调
      * @param callback     返回结果
      */
     @Override
-    public void execute(final Instructions instructions, final Call.Callback callback) {
+    public void execute(final Instructions info, final Call.Callback callback) {
         // 发送指令可以：https://github.com/TF27674569/Command
 
         // 这里模拟串口通信
@@ -44,9 +44,9 @@ public class TestDriver implements UsbDrive {
                     public void run() {
                         // 这里如果是进行串口通信
                         // 发送指令
-                        // send(instructions.getSend(),instructions.getIntercept());
+                        // send(info.getSend(),info.getIntercept());
                         // 如果拿到返回结果
-                        byte[] intercept = instructions.getIntercept();
+                        byte[] intercept = info.getIntercept();
                         try {
                             callback.onSuccess(intercept);
                         } catch (Exception e) {
