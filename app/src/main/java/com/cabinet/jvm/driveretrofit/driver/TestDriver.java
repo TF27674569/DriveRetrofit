@@ -1,19 +1,14 @@
 package com.cabinet.jvm.driveretrofit.driver;
 
-import org.driver.Info;
+import org.driver.base.Info;
 import org.driver.modle.Call;
 import org.driver.modle.UsbDrive;
-
-import java.util.concurrent.Executors;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -64,13 +59,13 @@ public class TestDriver implements UsbDrive {
                         try {
                             callback.onSuccess(value);
                         } catch (Exception e) {
-                            callback.onError(e.getMessage());
+                            callback.onError(e);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        callback.onError(e.getMessage());
+                        callback.onError(e);
                     }
 
                     @Override

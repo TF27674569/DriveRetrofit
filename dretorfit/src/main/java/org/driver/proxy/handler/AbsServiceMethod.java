@@ -1,6 +1,6 @@
 package org.driver.proxy.handler;
 
-import org.driver.Info;
+import org.driver.base.Info;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

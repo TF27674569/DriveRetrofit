@@ -1,6 +1,6 @@
 package org.driver.proxy;
 
-import org.driver.Info;
+import org.driver.base.Info;
 import org.driver.proxy.handler.AbsServiceMethod;
 import org.driver.proxy.handler.AnnotationInfo;
 

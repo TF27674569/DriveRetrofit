@@ -1,6 +1,6 @@
 package org.driver.modle;
 
-import org.driver.Info;
+import org.driver.base.Info;
 
 /**
  * Description : 驱动

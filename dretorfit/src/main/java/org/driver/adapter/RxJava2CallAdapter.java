@@ -7,10 +7,9 @@ import java.lang.reflect.Type;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.subjects.PublishSubject;
 
 /**
- * Description :
+ * Description : rxjava2 适配器
  * <p/>
  * Created : TIAN FENG
  * Date : 2018/5/15
@@ -48,7 +47,7 @@ public class RxJava2CallAdapter<T> implements Adapter {
                     }
 
                     @Override
-                    public void onError(String message) {
+                    public void onError(Throwable message) {
                         emitter.onError(new Throwable(message));
                     }
                 });

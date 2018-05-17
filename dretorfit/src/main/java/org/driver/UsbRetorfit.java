@@ -1,9 +1,11 @@
 package org.driver;
 
+import org.driver.base.OkDriver;
 import org.driver.modle.UsbDrive;
 import org.driver.adapter.Adapter;
 import org.driver.proxy.DriverInvocationHandler;
 import org.driver.utils.Utils;
+import org.usb.OkDriveClient;
 
 import java.lang.reflect.Proxy;
 
@@ -37,6 +39,11 @@ public final class UsbRetorfit {
 
         public Builder() {
             P = new Params();
+        }
+
+        public Builder client(OkDriveClient client) {
+            P.drive = new OkDriver(client);
+            return this;
         }
 
         // 执行驱动

@@ -1,8 +1,6 @@
 package org.driver.proxy.handler;
 
-import android.util.SparseArray;
-
-import org.driver.Info;
+import org.driver.base.Info;
 import org.driver.annoation.Action;
 import org.driver.annoation.Adress;
 import org.driver.annoation.Data;
@@ -16,7 +14,6 @@ import org.driver.utils.ArrayUtils;
 import org.driver.utils.Utils;
 
 import java.lang.annotation.Annotation;
-import java.util.HashMap;
 
 /**
  * Description : 注解信息

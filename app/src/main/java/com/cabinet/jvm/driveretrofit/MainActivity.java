@@ -6,12 +6,8 @@ import android.view.View;
 
 import com.cabinet.jvm.driveretrofit.driver.UsbClient;
 
-import org.driver.Rxjava2RetryWithDelay;
-import org.driver.annoation.Log;
-import org.driver.modle.Call;
+import org.driver.base.Rxjava2RetryWithDelay;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,21 +48,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void accept(byte[] bytes) throws Exception {
                         // 因为我那里模拟的串口返回的值是拦截指令 这里返回的是check()函数的@Intercept({127,126,10,10,9,10,10,126,127}) 注解的值
-                        android.util.Log.e("TAG", "onNext: "+Thread.currentThread().getName()+" "+printHex(bytes) );
+                        android.util.Log.e("TAG", "check2: "+Thread.currentThread().getName()+" "+printHex(bytes) );
                     }
                 });
 
-//        UsbClient.get().check1(null).execute(new Call.Callback() {
-//            @Override
-//            public void onSuccess(byte[] result) {
-//
-//            }
-//
-//            @Override
-//            public void onError(String message) {
-//
-//            }
-//        });
+        UsbClient.get().check1(new byte[]{1,2,3,4,5,6,7,8,9})
+                .subscribe(new Consumer<byte[]>() {
+                    @Override
+                    public void accept(byte[] bytes) throws Exception {
+                        android.util.Log.e("TAG", "check1: "+Thread.currentThread().getName()+" "+printHex(bytes) );
+                    }
+                });
+
 
 
     }

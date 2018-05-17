@@ -26,6 +26,6 @@ public interface Call {
         /**
          * 失败，返回原因
          */
-        void onError(String message);
+        void onError(Throwable throwable);
     }
 }

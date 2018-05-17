@@ -1,1 +1,1 @@
-include ':app', ':dretorfit'
+include ':app', ':dretorfit', ':library'

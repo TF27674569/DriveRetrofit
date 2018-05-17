@@ -1,4 +1,4 @@
-package org.driver;
+package org.driver.base;
 
 /**
  * Description : 指令封装对象
