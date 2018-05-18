@@ -10,6 +10,7 @@ import org.driver.annoation.Head;
 import org.driver.annoation.Intercept;
 import org.driver.annoation.Log;
 import org.driver.annoation.Retry;
+import org.driver.config.UsbConfig;
 import org.driver.utils.ArrayUtils;
 import org.driver.utils.Utils;
 
@@ -163,7 +164,7 @@ public final class AnnotationInfo implements Cloneable {
      * int 转  byte
      */
     private byte[] toByte(int value, int length) {
-        if (value == -1) return null;
+        if (value == UsbConfig.DEFAULT_NO_VALUE) return null;
         return Utils.intToByte(value, length);
     }
 
@@ -171,6 +172,6 @@ public final class AnnotationInfo implements Cloneable {
      * 检测是否有值
      */
     private byte[] checkNoData(byte[] bytes) {
-        return ArrayUtils.byteArrayToInt(bytes) == -1 ? null : bytes;
+        return ArrayUtils.byteArrayToInt(bytes) == UsbConfig.DEFAULT_NO_VALUE ? null : bytes;
     }
 }
