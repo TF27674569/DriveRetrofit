@@ -1,5 +1,8 @@
 # UsbRetorfit
 ### **使用配置**
+
+##### **依赖 compile 'com.tianfeng:usbretorfit:1.0.2'**
+
 1.与retorfit一样建一个Client类
 ```java
 public class UsbClient {
@@ -23,6 +26,7 @@ public class UsbClient {
     }
 }
 ```
+
 ```java
 
 
@@ -55,6 +59,35 @@ public class TestDriver implements UsbDrive {
 
                     }
                 });
+    }
+}
+```
+配合[UsbDriver](https://github.com/TF27674569/UsbDrive)使用
+```java
+public class UsbClient {
+
+    private static UsbApi api;
+
+
+    public static void init(Context context) {
+        OkDriveClient client = new OkDriveClient.Builder(context)
+                .intercept(new CrcInterceptor())
+                .timeOut(50000)
+                .build();
+
+        UsbRetorfit retorfit = new UsbRetorfit.Builder()
+                .client(client)
+                // 兼容rxjava2
+                .addCallAdapter(RxJava2CallAdapter.create())
+                .build();
+
+        api = retorfit.create(UsbApi.class);
+    }
+
+
+
+    public static UsbApi get() {
+        return api;
     }
 }
 ```
@@ -93,3 +126,5 @@ public interface UsbApi {
                     }
                 });
 ````
+
+4. 由于指令的拼接方式是与单片机协商好的协议，根据需求修改ServiceMethod和注解以及拼接方式
