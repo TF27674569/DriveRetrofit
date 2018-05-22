@@ -1,13 +1,14 @@
 package com.cabinet.jvm.driveretrofit.driver;
 
-import org.driver.annoation.Adress;
-import org.driver.annoation.End;
-import org.driver.annoation.Fun;
-import org.driver.annoation.Head;
-import org.driver.annoation.Intercept;
-import org.driver.annoation.Log;
-import org.driver.annoation.Retry;
 
+
+import org.usb.retorfit.annotation.Adress;
+import org.usb.retorfit.annotation.End;
+import org.usb.retorfit.annotation.Fun;
+import org.usb.retorfit.annotation.Head;
+import org.usb.retorfit.annotation.Intercept;
+import org.usb.retorfit.annotation.Log;
+import org.usb.retorfit.annotation.Retry;
 
 import io.reactivex.Observable;
 

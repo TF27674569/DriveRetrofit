@@ -1,7 +1,8 @@
 package com.cabinet.jvm.driveretrofit.driver;
 
-import org.driver.UsbRetorfit;
-import org.driver.adapter.RxJava2CallAdapter;
+
+import org.usb.retorfit.UsbRetorfit;
+import org.usb.retorfit.factory.RxJava2CallAdapterFactory;
 
 /**
  * Description :
@@ -17,9 +18,8 @@ public class UsbClient {
 
     static {
         UsbRetorfit retorfit = new UsbRetorfit.Builder()
-                .driver(new TestDriver())
                 // 兼容rxjava2
-                .addCallAdapter(RxJava2CallAdapter.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         api = retorfit.create(UsbApi.class);

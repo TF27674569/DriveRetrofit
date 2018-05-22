@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.cabinet.jvm.driveretrofit.driver.UsbClient;
 
-import org.driver.base.Rxjava2RetryWithDelay;
 
 import io.reactivex.functions.Consumer;
 
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public void click(View view) {
         UsbClient.get()
                 .check2()
-                .retryWhen(new Rxjava2RetryWithDelay(5,2000))
+//                .retryWhen(new Rxjava2RetryWithDelay(5,2000))
                 .subscribe(new Consumer<byte[]>() {
                     @Override
                     public void accept(byte[] bytes) throws Exception {
