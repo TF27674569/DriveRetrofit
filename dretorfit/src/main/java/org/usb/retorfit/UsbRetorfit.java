@@ -47,8 +47,8 @@ public final class UsbRetorfit {
         /**
          * 驱动
          */
-        public Builder addUsbDriverFactory(UsbDriver.Factory factory) {
-            params.usbDriverFactory = factory;
+        public Builder addUsbDriver(UsbDriver usbDriver) {
+            params.usbDriver = usbDriver;
             return this;
         }
 
@@ -72,7 +72,7 @@ public final class UsbRetorfit {
          * 构建
          */
         public UsbRetorfit build() {
-            Utils.checkNotNull(params.usbDriverFactory, "UsbDriver is null !!!");
+            Utils.checkNotNull(params.usbDriver, "UsbDriver is null !!!");
             return new UsbRetorfit(params);
         }
 
@@ -92,7 +92,7 @@ public final class UsbRetorfit {
             public ServiceParser.Factory serviceParserFactory = DefaultServiceParserFactory.DEFAULT_SERVICE_PARSER_FACTORY;
 
             // 驱动
-            public UsbDriver.Factory usbDriverFactory;
+            public UsbDriver usbDriver;
 
             private Params() {
             }

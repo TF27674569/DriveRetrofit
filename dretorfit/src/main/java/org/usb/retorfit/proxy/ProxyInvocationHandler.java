@@ -42,16 +42,16 @@ public final class ProxyInvocationHandler implements InvocationHandler {
         ServiceMethod serviceMethod = loadServiceMethod(method, args);
 
         // 驱动
-        UsbDriver usbDriver = mParams.usbDriverFactory.get();
+        UsbDriver usbDriver = mParams.usbDriver;
 
         // 请求信息
         Info info = serviceMethod.info(args);
 
         // 真实的请求call
-        Call realCall = new RealCall(usbDriver,info);
+        Call realCall = new RealCall(usbDriver, info);
 
         // 适配
-        return serviceMethod.adapt(mParams.adapterFactory,realCall);
+        return serviceMethod.adapt(mParams.adapterFactory, realCall);
     }
 
     /**
