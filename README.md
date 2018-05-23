@@ -1,7 +1,7 @@
 # UsbRetorfit
 ### **使用配置**
 
-##### **依赖 compile 'com.tianfeng:usbretorfit:2.0.4'**
+##### **依赖 compile 'com.tianfeng:usbretorfit:2.0.12'**
 
 1.与retorfit一样建一个Client类
 ```java

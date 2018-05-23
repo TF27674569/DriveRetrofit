@@ -10,14 +10,14 @@ import org.usb.retorfit.template.Call;
 import org.usb.retorfit.template.UsbDriver;
 
 /**
- * Description : OkUsbClientd 的包装类
+ * Description :
  * <p/>
  * Created : TIAN FENG
  * Date : 2018/5/23
  * Email : 27674569@qq.com
  * Version : 1.0
  */
-public class OkUsbDriver extends org.usb.driver.OkUsbClient implements UsbDriver {
+public class OkUsbDriver extends org.usb.driver.OkUsbClient implements UsbDriver{
     protected OkUsbDriver(Builder builder) {
         super(builder);
     }
@@ -45,13 +45,11 @@ public class OkUsbDriver extends org.usb.driver.OkUsbClient implements UsbDriver
     }
 
 
-    public static class Builder extends OkUsbClient.Builder {
+    public static class Builder extends OkUsbClient.Builder{
 
         public Builder(Context context) {
             super(context);
         }
-
-
 
         @Override
         public OkUsbDriver build() {
