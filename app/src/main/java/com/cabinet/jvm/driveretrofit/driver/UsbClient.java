@@ -1,7 +1,11 @@
 package com.cabinet.jvm.driveretrofit.driver;
 
 
+import android.content.Context;
+
+import org.usb.driver.OkUsbClient;
 import org.usb.retorfit.UsbRetorfit;
+import org.usb.retorfit.factory.OkUsbDriver;
 import org.usb.retorfit.factory.RxJava2CallAdapterFactory;
 
 /**
@@ -14,12 +18,14 @@ import org.usb.retorfit.factory.RxJava2CallAdapterFactory;
  */
 public class UsbClient {
 
-    private final static UsbApi api;
+    private  static UsbApi api;
 
-    static {
+    public static void init(Context context){
+        OkUsbDriver build = new OkUsbDriver.Builder(context).timeOut(30000).build();
         UsbRetorfit retorfit = new UsbRetorfit.Builder()
                 // 兼容rxjava2
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addUsbDriver(build)
                 .build();
 
         api = retorfit.create(UsbApi.class);

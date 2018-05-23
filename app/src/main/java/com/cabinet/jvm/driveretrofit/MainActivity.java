@@ -7,6 +7,8 @@ import android.view.View;
 import com.cabinet.jvm.driveretrofit.driver.UsbClient;
 
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        UsbClient.init(this);
     }
 
 
@@ -43,21 +45,35 @@ public class MainActivity extends AppCompatActivity {
         UsbClient.get()
                 .check2()
 //                .retryWhen(new Rxjava2RetryWithDelay(5,2000))
-                .subscribe(new Consumer<byte[]>() {
+                .subscribe(new Observer<byte[]>() {
                     @Override
-                    public void accept(byte[] bytes) throws Exception {
-                        // 因为我那里模拟的串口返回的值是拦截指令 这里返回的是check()函数的@Intercept({127,126,10,10,9,10,10,126,127}) 注解的值
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(byte[] bytes) {
                         android.util.Log.e("TAG", "check2: "+Thread.currentThread().getName()+" "+printHex(bytes) );
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        android.util.Log.e("TAG", "check2: "+e.getMessage() );
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
 
-        UsbClient.get().check1(new byte[]{1,2,3,4,5,6,7,8,9})
-                .subscribe(new Consumer<byte[]>() {
-                    @Override
-                    public void accept(byte[] bytes) throws Exception {
-                        android.util.Log.e("TAG", "check1: "+Thread.currentThread().getName()+" "+printHex(bytes) );
-                    }
-                });
+//        UsbClient.get().check1(new byte[]{1,2,3,4,5,6,7,8,9})
+//                .subscribe(new Consumer<byte[]>() {
+//                    @Override
+//                    public void accept(byte[] bytes) throws Exception {
+//                        android.util.Log.e("TAG", "check1: "+Thread.currentThread().getName()+" "+printHex(bytes) );
+//                    }
+//                });
 
 
 

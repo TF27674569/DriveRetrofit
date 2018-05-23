@@ -46,7 +46,7 @@ publish{
     userOrg = 'tf27674569'//bintray.com的用户名
     groupId = 'com.tianfeng'//jcenter上的路径
     artifactId = 'usbretorfit'//项目名称
-    publishVersion = '2.0.2'//版本号
+    publishVersion = '2.0.4'//版本号
     desc = '串口通信解耦'//描述，不重要
     website = siteUrl//项目主页
 }
