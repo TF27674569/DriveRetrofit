@@ -1,7 +1,9 @@
 package com.cabinet.jvm.driveretrofit;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.cabinet.jvm.driveretrofit.driver.UsbClient;
@@ -11,13 +13,16 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable {
 
+    Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UsbClient.init(this);
+
+        handler.postDelayed(this,3000);
     }
 
 
@@ -44,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     public void click(View view) {
         UsbClient.get()
                 .check2()
-//                .retryWhen(new Rxjava2RetryWithDelay(5,2000))
                 .subscribe(new Observer<byte[]>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -67,15 +71,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-//        UsbClient.get().check1(new byte[]{1,2,3,4,5,6,7,8,9})
-//                .subscribe(new Consumer<byte[]>() {
-//                    @Override
-//                    public void accept(byte[] bytes) throws Exception {
-//                        android.util.Log.e("TAG", "check1: "+Thread.currentThread().getName()+" "+printHex(bytes) );
-//                    }
-//                });
+    }
 
 
-
+    @Override
+    public void run() {
+        click(null);
+        handler.postDelayed(this,3000);
     }
 }

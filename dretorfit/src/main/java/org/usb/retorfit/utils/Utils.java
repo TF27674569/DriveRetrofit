@@ -100,9 +100,9 @@ public final class Utils {
         return object;
     }
 
-    public static void checkReturnType(boolean legitimate,String methodName,String message) {
+    public static void checkReturnType(boolean legitimate, String methodName, String message) {
         if (!legitimate) {
-            throw new IllegalStateException("函数 "+methodName+" 的返回类型必须是: "+message);
+            throw new IllegalStateException("函数 " + methodName + " 的返回类型必须是: " + message);
         }
     }
 
@@ -152,8 +152,8 @@ public final class Utils {
      * 合并数组补全length
      */
     public static byte[] merge(byte[]... values) {
-        // 判断包是否合法
-        if (values == null || values.length < 4||values[0]==null) {
+        // 判断包是否合法  没到长度位
+        if (values == null || values.length < UsbConfig.LENGTH_INDEX + 1 || values[0] == null) {
             return null;
         }
 

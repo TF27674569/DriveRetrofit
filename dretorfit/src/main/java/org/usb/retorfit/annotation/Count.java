@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 // 可以用在函数和参数中
 @Target({ElementType.METHOD, ElementType.PARAMETER})
-public @interface Retry {
+public @interface Count {
 
     /**
      * 重试次数

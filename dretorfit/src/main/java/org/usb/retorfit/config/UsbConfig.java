@@ -16,6 +16,11 @@ public class UsbConfig {
     public static final int DEFAULT_NO_VALUE = -1;
 
     /**
+     * 默认count值
+     */
+    public static final int DEFAULT_COUNT = 1;
+
+    /**
      * 包头，包尾 长度
      */
     public static final int HEAD_AND_END_LENGTH = 2;
@@ -33,6 +38,6 @@ public class UsbConfig {
     /**
      * 长度所在第几个数据处（不是字节,是数据拼装位置）
      */
-    public static final int LENGTH_INDEX = 3;
+    public static final int LENGTH_INDEX = 4;
 
 }

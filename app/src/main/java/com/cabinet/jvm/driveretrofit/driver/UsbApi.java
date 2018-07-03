@@ -8,7 +8,7 @@ import org.usb.retorfit.annotation.Fun;
 import org.usb.retorfit.annotation.Head;
 import org.usb.retorfit.annotation.Intercept;
 import org.usb.retorfit.annotation.Log;
-import org.usb.retorfit.annotation.Retry;
+import org.usb.retorfit.annotation.Count;
 
 import io.reactivex.Observable;
 
@@ -29,7 +29,7 @@ public interface UsbApi {
     @Adress(0x05)
     @Fun(0x06)
     @Log(Log.Logger.ON)
-    @Retry(0x05)
+    @Count(0x05)
     @End(0xfeff)
     @Intercept({-1,-2,10,10,9,10,10,-2,-1})
     Observable<byte[]> check();
@@ -37,8 +37,12 @@ public interface UsbApi {
     /**
      * 只拦截某指令
      */
-    @Retry(0x05)
-    @Intercept({-1,-2,1,1,9,1,0,-2,-1})
+    @Head(0xfffe)
+    @Adress(0x03)
+    @Fun(0x05)
+    @Log(Log.Logger.ON)
+    @Count(0x05)
+    @End(0xfeff)
     Observable<byte[]> check2();
 
 
@@ -49,7 +53,7 @@ public interface UsbApi {
     @Adress(0x05)
     @Fun(0x06)
     @Log(Log.Logger.ON)
-    @Retry(0x05)
+    @Count(0x05)
     @End(0xfeff)
     Observable<byte[]> check1(@Intercept byte[] in);
 }
