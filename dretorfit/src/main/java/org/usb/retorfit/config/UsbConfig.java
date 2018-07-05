@@ -37,7 +37,12 @@ public class UsbConfig {
 
     /**
      * 长度所在第几个数据处（不是字节,是数据拼装位置）
+     * 包头 0xfffe 2字节 0
+     * 地址 1字节 1
+     * 功能码 1字节 2
+     * 日志 1 字节 3
+     * 长度 1 字节 在三的后面
      */
-    public static final int LENGTH_INDEX = 4;
+    public static int LENGTH_INDEX = 3;
 
 }

@@ -29,14 +29,15 @@ public class ProxyServiceParser extends BaseServiceParser {
     protected byte[] adress;// 1 byte
     protected byte[] fun;// 1 byte
     protected byte[] data;// ? byte
-    protected byte[] count;// 1 byte
+    protected byte[] retry;// 1 byte
     protected byte[] log;// 1 byte
     protected byte[] action;// 1 byte
+    protected byte[] count;// 1 byte
     protected byte[] end;// 2 byte
     protected byte[] intercepr;
 
     // 重试次数
-    protected int intCount;
+    protected int retryCount;
     // 重试间隔
     protected long timer;
 
@@ -50,11 +51,11 @@ public class ProxyServiceParser extends BaseServiceParser {
          * 会自动补全长度，和长度所在位置
          * 地址 功能码  日志 长度 数据 动作 count
          */
-        byte[] send = Utils.merge(head, adress, fun, log, data, action, count, end);
+        byte[] send = Utils.merge(head, adress, fun,log, data, action, count, end);
         // 拦截
         intercepr = intercepr == null ? send : intercepr;
         // 创建信息
-        return new Info(intercepr, send, intCount, timer);
+        return new Info(intercepr, send, retryCount, timer);
     }
 
     /**
@@ -78,8 +79,8 @@ public class ProxyServiceParser extends BaseServiceParser {
             data = checkNoData(value.value());
         } else if (annotation instanceof Count) {
             Count value = (Count) annotation;
-            intCount = value.value();
-            count = toByte(intCount, value.size());
+            retryCount = value.value();
+            retry = toByte(retryCount, value.size());
             timer = value.time();
         } else if (annotation instanceof Log) {
             Log value = (Log) annotation;
@@ -116,8 +117,8 @@ public class ProxyServiceParser extends BaseServiceParser {
         } else if (annotation instanceof Data) {
             data = (byte[]) value;
         } else if (annotation instanceof Count) {
-            intCount = (int) value;
-            count = toByte(intCount, ((Count) annotation).size());
+            retryCount = (int) value;
+            retry = toByte(retryCount, ((Count) annotation).size());
             timer = ((Count) annotation).time();
         } else if (annotation instanceof Log) {
             log = toByte(((Log.Logger) value).getValue(), ((Log) annotation).size());
