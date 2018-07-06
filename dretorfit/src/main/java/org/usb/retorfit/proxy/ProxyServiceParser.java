@@ -51,7 +51,7 @@ public class ProxyServiceParser extends BaseServiceParser {
          * 会自动补全长度，和长度所在位置
          * 地址 功能码  日志 长度 数据 动作 count
          */
-        byte[] send = Utils.merge(head, adress, fun,log, data, action, count, end);
+        byte[] send = Utils.merge(head, adress, fun, log, data, action, count, end);
         // 拦截
         intercepr = intercepr == null ? send : intercepr;
         // 创建信息
@@ -82,6 +82,7 @@ public class ProxyServiceParser extends BaseServiceParser {
             retryCount = value.value();
             retry = toByte(retryCount, value.size());
             timer = value.time();
+            count = Utils.intToByte(value.value(), value.size());
         } else if (annotation instanceof Log) {
             Log value = (Log) annotation;
             log = toByte(value.value().getValue(), value.size());
@@ -94,9 +95,6 @@ public class ProxyServiceParser extends BaseServiceParser {
         } else if (annotation instanceof End) {
             End value = (End) annotation;
             end = toByte(value.value(), value.size());
-        } else if (annotation instanceof Count) {
-            Count value = (Count) annotation;
-            count = toByte(value.value(), value.size());
         }
     }
 
@@ -120,6 +118,7 @@ public class ProxyServiceParser extends BaseServiceParser {
             retryCount = (int) value;
             retry = toByte(retryCount, ((Count) annotation).size());
             timer = ((Count) annotation).time();
+            count = Utils.intToByte(retryCount, ((Count) annotation).size());
         } else if (annotation instanceof Log) {
             log = toByte(((Log.Logger) value).getValue(), ((Log) annotation).size());
         } else if (annotation instanceof Action) {
@@ -128,8 +127,6 @@ public class ProxyServiceParser extends BaseServiceParser {
             intercepr = (byte[]) value;
         } else if (annotation instanceof End) {
             end = toByte((int) value, ((End) annotation).size());
-        } else if (annotation instanceof Count) {
-            count = toByte((int) value, ((Count) annotation).size());
         }
     }
 }
